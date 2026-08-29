@@ -128,6 +128,24 @@
       "paymentMethod": "cash",
       "staffId": "u003",
       "id": "r1787997320940_3956hf29o"
+    },
+    {
+      "bookingId": "b1788005863238_xauqyote",
+      "userId": "u1787992056849_xlp0htfb9",
+      "computerId": "cld002",
+      "computerName": "PC-cld002",
+      "zone": "A",
+      "startTime": "2026-08-29T03:00:00.000Z",
+      "endTime": "2026-08-29T05:00:00.000Z",
+      "durationHours": 2,
+      "basePrice": 60,
+      "discountsApplied": [],
+      "totalDiscount": 0,
+      "finalPrice": 60,
+      "paidAt": "2026-08-29T13:57:34.940Z",
+      "paymentMethod": "cash",
+      "staffId": "u003",
+      "id": "r1788011854944_t9fyltjkf"
     }
   ]
 }

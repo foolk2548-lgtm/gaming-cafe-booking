@@ -51,6 +51,7 @@ export interface Computer {
   currentBookingId: string | null;
   remoteInfo: RemoteInfo | null;
   imgUrl?: string;
+  maintenanceReason?: string;
 }
 
 export interface DiscountApplied {

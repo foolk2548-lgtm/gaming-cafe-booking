@@ -23,7 +23,7 @@
       "role": "manager",
       "membershipId": null,
       "createdAt": "2024-01-01T00:00:00.000Z",
-      "isNewMember": false,
+      "isNewMember": true,
       "firstBillUsed": false,
       "displayName": "ผู้จัดการ",
       "phone": "0823456789"

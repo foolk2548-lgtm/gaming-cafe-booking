@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 import Navbar from '@/components/ui/Navbar';
 import type { Computer } from '@/lib/types';
 
@@ -15,20 +16,55 @@ const statusConfig = {
   available: { label: 'ว่าง', cls: 'badge-available', dot: 'bg-[#00ff88]' },
   occupied: { label: 'ไม่ว่าง', cls: 'badge-occupied', dot: 'bg-[#ec4899] pulse-occupied' },
   maintenance: { label: 'ซ่อมบำรุง', cls: 'badge-maintenance', dot: 'bg-[#ff6b35]' },
+  'maintenance-reported': { label: 'รอซ่อม', cls: 'border-yellow-500/30 text-yellow-400 bg-yellow-500/10', dot: 'bg-yellow-400' },
+  provisioning: { label: 'กำลังเตรียม', cls: 'border-blue-500/30 text-blue-400 bg-blue-500/10', dot: 'bg-blue-400 pulse-occupied' },
 };
 
 export default function ComputersPage() {
   const router = useRouter();
+  const { data: session } = useSession();
+  const role = session?.user?.role || '';
+  const isStaff = ['staff', 'manager', 'admin'].includes(role);
+
   const [computers, setComputers] = useState<Computer[]>([]);
   const [loading, setLoading] = useState(true);
   const [filterZone, setFilterZone] = useState<string>('all');
   const [filterStatus, setFilterStatus] = useState<string>('all');
 
-  useEffect(() => {
+  const [repairModalOpen, setRepairModalOpen] = useState(false);
+  const [repairPC, setRepairPC] = useState<Computer | null>(null);
+  const [repairReason, setRepairReason] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+
+  const fetchComputers = () => {
     fetch('/api/computers')
       .then((r) => r.json())
       .then((data) => { setComputers(data.computers); setLoading(false); });
+  };
+
+  useEffect(() => {
+    fetchComputers();
   }, []);
+
+  const submitRepairReport = async () => {
+    if (!repairPC || !repairReason.trim()) return;
+    setSubmitting(true);
+    const res = await fetch('/api/computers', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ id: repairPC.id, status: repairPC.status, maintenanceReason: repairReason }),
+    });
+    setSubmitting(false);
+    if (res.ok) {
+      alert(`🔧 แจ้งซ่อมเครื่อง ${repairPC.name} สำเร็จ`);
+      setRepairModalOpen(false);
+      setRepairPC(null);
+      setRepairReason('');
+      fetchComputers();
+    } else {
+      alert('❌ แจ้งซ่อมไม่สำเร็จ');
+    }
+  };
 
   const filtered = computers.filter((c) => {
     const zoneOk = filterZone === 'all' || c.zone === filterZone;
@@ -125,11 +161,13 @@ export default function ComputersPage() {
                     return (
                       <div
                         key={pc.id}
-                        className={`card-neon border p-4 cursor-pointer transition-all hover:shadow-lg ${zc.border} ${zc.glow} ${!canBook ? 'opacity-60' : ''}`}
+                        className={`card-neon border p-4 cursor-pointer transition-all hover:shadow-lg relative group ${zc.border} ${zc.glow} ${!canBook ? 'opacity-60' : ''}`}
                         onClick={() => canBook && router.push(`/booking?computer=${pc.id}`)}
                       >
                         {/* PC Icon */}
-                        <div className="text-center text-3xl mb-3">🖥️</div>
+                        <div className="text-center text-3xl mb-3 mt-2 relative">
+                          🖥️
+                        </div>
                         <div className="text-center">
                           <div className="font-bold text-white text-sm mb-1">{pc.name}</div>
                           <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs border ${st.cls}`}>
@@ -155,6 +193,44 @@ export default function ComputersPage() {
           })
         )}
       </div>
+
+      {/* Repair Modal */}
+      {repairModalOpen && repairPC && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm">
+          <div className="card-neon border border-yellow-500/30 p-6 w-full max-w-md page-enter relative bg-[#0f1021]">
+            <h3 className="text-lg font-bold text-white mb-2">🔧 แจ้งปัญหาเครื่อง {repairPC.name}</h3>
+            <p className="text-xs text-[#94a3b8] mb-4">ข้อมูลจะถูกส่งให้ผู้จัดการเพื่อดำเนินการประสานงานช่างต่อไป</p>
+            
+            <div className="mb-4">
+              <label className="block text-sm text-[#94a3b8] mb-2">รายละเอียดปัญหา / อาการเสีย</label>
+              <textarea
+                rows={4}
+                value={repairReason}
+                onChange={(e) => setRepairReason(e.target.value)}
+                placeholder="เช่น จอฟ้า, คีย์บอร์ดกดไม่ติด, เครื่องเปิดไม่ติด..."
+                className="input-cyber w-full px-3 py-2 rounded-lg border text-sm resize-none bg-[#1e2035] text-white focus:outline-none focus:border-yellow-500/50"
+              />
+            </div>
+
+            <div className="flex gap-3">
+              <button
+                onClick={() => { setRepairModalOpen(false); setRepairPC(null); }}
+                className="flex-1 py-2.5 rounded-xl border border-[#1e2035] text-[#94a3b8] hover:text-white hover:bg-white/5 transition-all text-sm"
+              >
+                ยกเลิก
+              </button>
+              <button
+                onClick={submitRepairReport}
+                disabled={submitting || !repairReason.trim()}
+                className="flex-1 py-2.5 rounded-xl bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 hover:bg-yellow-500/30 font-bold transition-all text-sm disabled:opacity-40"
+              >
+                {submitting ? 'กำลังส่ง...' : '📨 ส่งแจ้งซ่อม'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }

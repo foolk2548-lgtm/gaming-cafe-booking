@@ -76,13 +76,28 @@ export async function getComputerById(id: string): Promise<Computer | undefined>
 export async function updateComputerStatus(
   id: string,
   status: Computer['status'],
-  bookingId: string | null = null
+  bookingId: string | null = null,
+  maintenanceReason: string | undefined = undefined
 ): Promise<Computer | null> {
   const data = await readJson<{ computers: Computer[] }>('computers.json');
   const idx = data.computers.findIndex((c) => c.id === id);
   if (idx === -1) return null;
   data.computers[idx].status = status;
   data.computers[idx].currentBookingId = bookingId;
+  
+  if (maintenanceReason !== undefined) {
+    if (maintenanceReason === "") {
+      delete data.computers[idx].maintenanceReason;
+    } else {
+      data.computers[idx].maintenanceReason = maintenanceReason;
+    }
+  }
+  
+  // If status is back to available, clear the reason
+  if (status === 'available') {
+    delete data.computers[idx].maintenanceReason;
+  }
+
   await writeJson('computers.json', data);
   return data.computers[idx];
 }

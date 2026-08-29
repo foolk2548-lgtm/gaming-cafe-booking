@@ -37,6 +37,10 @@ export default function StaffDashboard() {
   const [showRejectBox, setShowRejectBox] = useState(false);
   const [rejectReason, setRejectReason] = useState('');
   const [fullScreenSlip, setFullScreenSlip] = useState<string | null>(null);
+  
+  const [repairModalOpen, setRepairModalOpen] = useState(false);
+  const [repairPC, setRepairPC] = useState<Computer | null>(null);
+  const [repairReason, setRepairReason] = useState('');
 
   useEffect(() => {
     if (status === 'authenticated' && !['staff', 'manager', 'admin'].includes(session?.user?.role ?? '')) {
@@ -136,15 +140,20 @@ export default function StaffDashboard() {
     }
   };
 
-  const handleReportRepair = async (id: string, name: string) => {
-    if (!confirm(`ยืนยันการแจ้งซ่อมเครื่อง "${name}" ใช่ไหม?\nเครื่องนี้จะถูกระงับการใช้งานเพื่อรอผู้จัดการตรวจสอบ`)) return;
+  const submitRepairReport = async () => {
+    if (!repairPC || !repairReason.trim()) return;
+    setSubmitting(true);
     const res = await fetch('/api/computers', {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id, status: 'maintenance-reported' }),
+      body: JSON.stringify({ id: repairPC.id, status: repairPC.status, maintenanceReason: repairReason }),
     });
+    setSubmitting(false);
     if (res.ok) {
-      showToast(`🔧 แจ้งซ่อมเครื่อง ${name} สำเร็จ`);
+      showToast(`🔧 แจ้งซ่อมเครื่อง ${repairPC.name} สำเร็จ`);
+      setRepairModalOpen(false);
+      setRepairPC(null);
+      setRepairReason('');
       fetchData();
     } else {
       const err = await res.json();
@@ -237,15 +246,18 @@ export default function StaffDashboard() {
               return (
                 <div key={vm.id} className={`p-3 rounded-xl border ${borderColor} relative group`}>
                   <div className="flex items-start justify-between">
-                    <div className="flex-1 min-w-0">
+                    <div className="flex-1 min-w-0 relative">
                       <div className="text-lg">☁️</div>
+                      {vm.maintenanceReason && vm.status !== 'maintenance' && (
+                        <span className="absolute top-0 left-6 text-[10px] bg-red-500 text-white px-1 rounded-sm" title="รออนุมัติซ่อม">⚠️ แจ้งซ่อม</span>
+                      )}
                       <div className="text-xs text-white font-bold truncate mt-0.5">{vm.name}</div>
                       <div className={`text-xs mt-1 font-semibold ${statusColor}`}>{statusLabel}</div>
                     </div>
                     <div className="flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                      {vm.status === 'available' && (
+                      {(vm.status === 'available' || vm.status === 'occupied') && !vm.maintenanceReason && (
                         <button
-                          onClick={() => handleReportRepair(vm.id, vm.name)}
+                          onClick={() => { setRepairPC(vm); setRepairReason(''); setRepairModalOpen(true); }}
                           title="แจ้งซ่อมเครื่องนี้"
                           className="text-yellow-400 hover:text-yellow-300 text-sm p-1 rounded bg-[#1e2035]/80 hover:bg-[#1e2035]"
                         >
@@ -479,6 +491,43 @@ export default function StaffDashboard() {
                 alt="Full Screen Slip"
                 className="w-full h-full object-contain rounded-lg border border-[#8b5cf6]/30 shadow-2xl"
               />
+            </div>
+          </div>
+        )}
+
+        {/* Repair Modal */}
+        {repairModalOpen && repairPC && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4">
+            <div className="card-neon border border-yellow-500/30 p-6 w-full max-w-md page-enter">
+              <h3 className="text-lg font-bold text-white mb-2">🔧 แจ้งปัญหาเครื่อง {repairPC.name}</h3>
+              <p className="text-xs text-[#94a3b8] mb-4">ข้อมูลจะถูกส่งให้ผู้จัดการเพื่อดำเนินการประสานงานช่างต่อไป</p>
+              
+              <div className="mb-4">
+                <label className="block text-sm text-[#94a3b8] mb-2">รายละเอียดปัญหา / อาการเสีย</label>
+                <textarea
+                  rows={4}
+                  value={repairReason}
+                  onChange={(e) => setRepairReason(e.target.value)}
+                  placeholder="เช่น จอฟ้า, คีย์บอร์ดกดไม่ติด, เครื่องเปิดไม่ติด..."
+                  className="input-cyber w-full px-3 py-2 rounded-lg border text-sm resize-none"
+                />
+              </div>
+
+              <div className="flex gap-3">
+                <button
+                  onClick={() => { setRepairModalOpen(false); setRepairPC(null); }}
+                  className="flex-1 py-2.5 rounded-xl border border-[#1e2035] text-[#94a3b8] hover:text-white transition-all text-sm"
+                >
+                  ยกเลิก
+                </button>
+                <button
+                  onClick={submitRepairReport}
+                  disabled={submitting || !repairReason.trim()}
+                  className="flex-1 py-2.5 rounded-xl bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 hover:bg-yellow-500/30 font-bold transition-all text-sm disabled:opacity-40"
+                >
+                  {submitting ? 'กำลังส่ง...' : '📨 ส่งแจ้งซ่อม'}
+                </button>
+              </div>
             </div>
           </div>
         )}

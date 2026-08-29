@@ -31,8 +31,8 @@
         "headset": "ใช้อุปกรณ์ส่วนตัว",
         "extras": "Windows 11 Pro, 100Mbps Uplink, SSD NVMe"
       },
-      "status": "occupied",
-      "currentBookingId": "b1788005863238_xauqyote",
+      "status": "available",
+      "currentBookingId": null,
       "remoteInfo": null,
       "imgUrl": "/images/pc-standard.jpg"
     },
@@ -49,8 +49,8 @@
         "headset": "ใช้อุปกรณ์ส่วนตัว",
         "extras": "Windows 11 Pro, 100Mbps Uplink, SSD NVMe"
       },
-      "status": "occupied",
-      "currentBookingId": "b001",
+      "status": "available",
+      "currentBookingId": null,
       "remoteInfo": null,
       "imgUrl": "/images/pc-standard.jpg"
     },
@@ -85,7 +85,7 @@
         "headset": "ใช้อุปกรณ์ส่วนตัว",
         "extras": "Windows 11 Pro, 100Mbps Uplink, SSD NVMe"
       },
-      "status": "maintenance",
+      "status": "available",
       "currentBookingId": null,
       "remoteInfo": null,
       "imgUrl": "/images/pc-standard.jpg"
@@ -121,8 +121,8 @@
         "headset": "ใช้อุปกรณ์ส่วนตัว",
         "extras": "Windows 11 Pro, 300Mbps Uplink, NVMe RAID"
       },
-      "status": "occupied",
-      "currentBookingId": "b002",
+      "status": "available",
+      "currentBookingId": null,
       "remoteInfo": null,
       "imgUrl": "/images/pc-gaming.jpg"
     },
@@ -193,8 +193,8 @@
         "headset": "ใช้อุปกรณ์ส่วนตัว",
         "extras": "Windows 11 Pro, 1Gbps Uplink, NVMe RAID, Priority Queue"
       },
-      "status": "occupied",
-      "currentBookingId": "b003",
+      "status": "available",
+      "currentBookingId": null,
       "remoteInfo": null,
       "imgUrl": "/images/pc-vip.jpg"
     },

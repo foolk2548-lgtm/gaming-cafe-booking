@@ -31,23 +31,25 @@ export default function ManagerDashboard() {
   }, []);
 
   const today = bookings.filter((b) => new Date(b.createdAt).toDateString() === new Date().toDateString());
-  const todayRevenue = today.filter((b) => b.status === 'completed').reduce((s, b) => s + b.finalPrice, 0);
-  const totalRevenue = bookings.filter((b) => b.status === 'completed').reduce((s, b) => s + b.finalPrice, 0);
 
-  const promoStats = ['time_based', 'duration_based', 'happy_hour', 'member_based', 'new_member_bill'].map((type) => ({
-    type,
-    label: type === 'time_based' ? 'ช่วงกลางวัน' : type === 'duration_based' ? 'เล่นยาว' : type === 'happy_hour' ? 'Happy Hour' : type === 'member_based' ? 'สมาชิก' : 'สมาชิกใหม่',
-    count: bookings.filter((b) => b.discountsApplied.some((d) => d.type === type)).length,
-    totalSaved: bookings.flatMap((b) => b.discountsApplied.filter((d) => d.type === type)).reduce((s, d) => s + d.amount, 0),
-  }));
-
-  const handleUpdatePC = async (id: string, status: string) => {
+  const handleUpdatePC = async (id: string, status: string, clearReason: boolean = false) => {
+    const body: any = { id, status };
+    if (clearReason) body.maintenanceReason = "";
+    
     await fetch('/api/computers', {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id, status }),
+      body: JSON.stringify(body),
     });
-    const updated = computers.map((c) => c.id === id ? { ...c, status: status as Computer['status'] } : c);
+    
+    const updated = computers.map((c) => {
+      if (c.id === id) {
+        const newC = { ...c, status: status as Computer['status'] };
+        if (clearReason) delete newC.maintenanceReason;
+        return newC;
+      }
+      return c;
+    });
     setComputers(updated);
   };
 
@@ -61,10 +63,8 @@ export default function ManagerDashboard() {
         </div>
 
         {/* KPIs */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-2 md:grid-cols-2 gap-4 mb-8">
           {[
-            { label: 'รายได้วันนี้', value: `${todayRevenue.toFixed(0)} ฿`, color: 'text-[#00d4ff]' },
-            { label: 'รายได้รวม', value: `${totalRevenue.toFixed(0)} ฿`, color: 'text-[#8b5cf6]' },
             { label: 'การจองทั้งหมด', value: bookings.length, color: 'text-white' },
             { label: 'เครื่องว่าง', value: computers.filter((c) => c.status === 'available').length, color: 'text-green-400' },
           ].map((kpi) => (
@@ -75,32 +75,22 @@ export default function ManagerDashboard() {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Promotion stats */}
-          <div className="card-neon border border-[#1e2035] p-6">
-            <h2 className="text-lg font-bold text-white mb-4">ประสิทธิภาพโปรโมชั่น</h2>
-            <div className="space-y-3">
-              {promoStats.map((p) => (
-                <div key={p.type} className="flex items-center justify-between">
-                  <span className="text-[#94a3b8] text-sm">{p.label}</span>
-                  <div className="flex items-center gap-3">
-                    <span className="text-white text-sm font-medium">{p.count} ครั้ง</span>
-                    <span className="text-green-400 text-xs">ลดไป {p.totalSaved.toFixed(0)} ฿</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+        <div className="grid grid-cols-1 gap-6">
 
           {/* Computer management */}
           <div className="card-neon border border-[#1e2035] p-6">
             <h2 className="text-lg font-bold text-white mb-4">จัดการสถานะคอมพิวเตอร์</h2>
             <div className="space-y-2 max-h-64 overflow-y-auto pr-1">
               {computers.map((pc) => (
-                <div key={pc.id} className="flex items-center justify-between p-2 rounded-lg bg-[#0a0a1a]">
-                  <div>
+                <div key={pc.id} className="flex items-center justify-between p-2 rounded-lg bg-[#0a0a1a] flex-wrap gap-2">
+                  <div className="flex-1">
                     <span className="text-white text-sm font-medium">{pc.name}</span>
                     <span className="text-xs text-[#475569] ml-2">Zone {pc.zone}</span>
+                    {pc.maintenanceReason && pc.status !== 'maintenance' && (
+                      <div className="text-[11px] text-yellow-500/80 mt-0.5 bg-yellow-500/10 px-2 py-1 rounded inline-block border border-yellow-500/20">
+                        💬 สาเหตุ: {pc.maintenanceReason}
+                      </div>
+                    )}
                   </div>
                   <div className="flex items-center gap-2">
                     <span className={`text-xs px-2 py-0.5 rounded-full border ${
@@ -111,13 +101,21 @@ export default function ManagerDashboard() {
                     }`}>
                       {pc.status === 'available' ? 'ว่าง' : pc.status === 'occupied' ? 'ใช้งาน' : pc.status === 'maintenance-reported' ? 'รอซ่อม' : 'กำลังซ่อม'}
                     </span>
-                    {pc.status === 'maintenance-reported' && (
-                      <button
-                        onClick={() => handleUpdatePC(pc.id, 'maintenance')}
-                        className="text-xs px-2 py-0.5 rounded border border-yellow-500/30 text-yellow-400 hover:bg-yellow-500/10 transition-all"
-                      >
-                        ✅ รับซ่อม
-                      </button>
+                    {pc.maintenanceReason && pc.status !== 'maintenance' && (
+                      <>
+                        <button
+                          onClick={() => handleUpdatePC(pc.id, 'maintenance')}
+                          className="text-xs px-2 py-0.5 rounded border border-yellow-500/30 text-yellow-400 hover:bg-yellow-500/10 transition-all font-bold"
+                        >
+                          ✅ อนุมัติซ่อม
+                        </button>
+                        <button
+                          onClick={() => handleUpdatePC(pc.id, pc.status, true)}
+                          className="text-xs px-2 py-0.5 rounded border border-gray-500/30 text-gray-400 hover:bg-gray-500/10 transition-all"
+                        >
+                          ❌ ใช้งานปกติ
+                        </button>
+                      </>
                     )}
                     {pc.status === 'maintenance' && (
                       <button

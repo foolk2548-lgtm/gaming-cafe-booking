@@ -21,13 +21,13 @@ export async function GET(req: NextRequest) {
 export async function PATCH(req: NextRequest) {
   try {
     const body = await req.json();
-    const { id, status, bookingId } = body;
+    const { id, status, bookingId, maintenanceReason } = body;
 
     if (!id || !status) {
       return NextResponse.json({ error: 'Missing id or status' }, { status: 400 });
     }
 
-    const updated = await updateComputerStatus(id, status, bookingId ?? null);
+    const updated = await updateComputerStatus(id, status, bookingId ?? null, maintenanceReason);
     if (!updated) return NextResponse.json({ error: 'Computer not found' }, { status: 404 });
 
     return NextResponse.json({ computer: updated });

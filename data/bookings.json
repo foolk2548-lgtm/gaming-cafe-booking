@@ -183,7 +183,7 @@
       "discountsApplied": [],
       "totalDiscount": 0,
       "finalPrice": 60,
-      "status": "confirmed",
+      "status": "completed",
       "createdAt": "2026-08-29T12:17:43.232Z",
       "note": "",
       "connectionDetails": {

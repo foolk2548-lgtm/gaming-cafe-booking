@@ -14,12 +14,7 @@ const navLinks = [
   { href: '/membership', label: 'สมาชิก', roles: ['customer', 'manager', 'admin'] },
 ];
 
-const dashboardLinks: Record<string, { href: string; label: string }> = {
-  staff: { href: '/staff/dashboard', label: 'แดชบอร์ดพนักงาน' },
-  accounting: { href: '/accounting/dashboard', label: 'แดชบอร์ดการเงิน' },
-  manager: { href: '/manager/dashboard', label: 'แดชบอร์ดผู้จัดการ' },
-  admin: { href: '/admin/dashboard', label: 'แดชบอร์ด Admin' },
-};
+// Remove dashboardLinks as we use inline hierarchical logic now
 
 const roleBadgeColors: Record<string, string> = {
   customer: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
@@ -90,17 +85,40 @@ export default function Navbar() {
                 </Link>
               );
             })}
-            {role && dashboardLinks[role] && (
-              <Link
-                href={dashboardLinks[role].href}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                  pathname.includes('dashboard')
-                    ? 'bg-[#8b5cf6]/20 text-[#00d4ff] border border-[#8b5cf6]/40'
-                    : 'text-[#94a3b8] hover:text-white hover:bg-white/5'
-                }`}
-              >
-                {dashboardLinks[role].label}
-              </Link>
+            {['staff', 'accounting', 'manager', 'admin'].includes(role) && (
+              <div className="relative group h-full flex items-center">
+                <button
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                    pathname.includes('dashboard')
+                      ? 'bg-[#8b5cf6]/20 text-[#00d4ff] border border-[#8b5cf6]/40'
+                      : 'text-[#94a3b8] hover:text-white hover:bg-white/5'
+                  }`}
+                >
+                  ระบบจัดการ ▾
+                </button>
+                <div className="absolute top-full right-0 mt-2 w-48 bg-[#1e2035] border border-[#3b3e66] rounded-xl shadow-lg py-1 z-50 opacity-0 group-hover:opacity-100 transition-all invisible group-hover:visible translate-y-2 group-hover:translate-y-0">
+                  {role === 'staff' && (
+                    <Link href="/staff/dashboard" className="block px-4 py-2 text-sm text-[#94a3b8] hover:text-[#00d4ff] hover:bg-[#3b3e66]/50">
+                      แดชบอร์ดพนักงาน
+                    </Link>
+                  )}
+                  {['accounting', 'admin'].includes(role) && (
+                    <Link href="/accounting/dashboard" className="block px-4 py-2 text-sm text-[#94a3b8] hover:text-[#eab308] hover:bg-[#3b3e66]/50">
+                      แดชบอร์ดการเงิน
+                    </Link>
+                  )}
+                  {['manager', 'admin'].includes(role) && (
+                    <Link href="/manager/dashboard" className="block px-4 py-2 text-sm text-[#94a3b8] hover:text-[#a855f7] hover:bg-[#3b3e66]/50">
+                      แดชบอร์ดผู้จัดการ
+                    </Link>
+                  )}
+                  {['manager', 'admin'].includes(role) && (
+                    <Link href="/admin/dashboard" className="block px-4 py-2 text-sm text-[#94a3b8] hover:text-[#ef4444] hover:bg-[#3b3e66]/50">
+                      จัดการผู้ใช้งาน
+                    </Link>
+                  )}
+                </div>
+              </div>
             )}
           </div>
 
@@ -202,13 +220,24 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            {role && dashboardLinks[role] && (
-              <Link
-                href={dashboardLinks[role].href}
-                onClick={() => setMobileOpen(false)}
-                className="block px-4 py-3 rounded-lg text-sm font-medium text-[#94a3b8] hover:text-white hover:bg-white/5"
-              >
-                {dashboardLinks[role].label}
+            {role === 'staff' && (
+              <Link href="/staff/dashboard" onClick={() => setMobileOpen(false)} className="block px-4 py-3 rounded-lg text-sm font-medium text-[#94a3b8] hover:text-[#00d4ff] hover:bg-white/5">
+                แดชบอร์ดพนักงาน
+              </Link>
+            )}
+            {['accounting', 'admin'].includes(role) && (
+              <Link href="/accounting/dashboard" onClick={() => setMobileOpen(false)} className="block px-4 py-3 rounded-lg text-sm font-medium text-[#94a3b8] hover:text-[#eab308] hover:bg-white/5">
+                แดชบอร์ดการเงิน
+              </Link>
+            )}
+            {['manager', 'admin'].includes(role) && (
+              <Link href="/manager/dashboard" onClick={() => setMobileOpen(false)} className="block px-4 py-3 rounded-lg text-sm font-medium text-[#94a3b8] hover:text-[#a855f7] hover:bg-white/5">
+                แดชบอร์ดผู้จัดการ
+              </Link>
+            )}
+            {['manager', 'admin'].includes(role) && (
+              <Link href="/admin/dashboard" onClick={() => setMobileOpen(false)} className="block px-4 py-3 rounded-lg text-sm font-medium text-[#94a3b8] hover:text-[#ef4444] hover:bg-white/5">
+                จัดการผู้ใช้งาน
               </Link>
             )}
             <div className="pt-2 border-t border-[#1e2035] space-y-2">
