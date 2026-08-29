@@ -29,6 +29,7 @@ export interface User {
   firstBillUsed: boolean;
   displayName: string;
   phone: string;
+  avatarUrl?: string;
 }
 
 export interface ComputerSpecs {

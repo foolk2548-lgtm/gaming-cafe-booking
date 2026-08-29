@@ -1,7 +1,7 @@
 import { withAuth } from "next-auth/middleware";
 
 export default withAuth({
-  // Matches the pages that require authentication
+  secret: process.env.NEXTAUTH_SECRET || 'gaming-cafe-super-secret-key-change-in-prod',
 });
 
 export const config = {

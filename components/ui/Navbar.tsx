@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useSession, signOut } from 'next-auth/react';
+import ProfileSettingsModal from './ProfileSettingsModal';
 
 const navLinks = [
   { href: '/', label: 'หน้าแรก', roles: ['all'] },
@@ -37,9 +38,13 @@ const roleLabels: Record<string, string> = {
 };
 
 export default function Navbar() {
-  const { data: session } = useSession();
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
+  const [profileModalOpen, setProfileModalOpen] = useState(false);
+  
+  // Also pass auth status down to the modal
+  const { data: session, status } = useSession();
 
   const role = session?.user?.role ?? '';
   const visibleLinks = navLinks.filter(
@@ -47,7 +52,8 @@ export default function Navbar() {
   );
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-[#1e2035] bg-[#05050f]/90 backdrop-blur-xl">
+    <>
+      <nav className="sticky top-0 z-50 border-b border-[#1e2035] bg-[#05050f]/90 backdrop-blur-xl">
       {/* Glow line on top */}
       <div className="h-[2px] w-full bg-gradient-to-r from-transparent via-[#8b5cf6] to-transparent opacity-60" />
 
@@ -108,12 +114,43 @@ export default function Navbar() {
                   </span>
                 )}
                 <span className="text-sm text-[#94a3b8]">{session.user?.name}</span>
-                <button
-                  onClick={() => signOut({ callbackUrl: '/login' })}
-                  className="px-4 py-2 text-sm font-medium text-[#94a3b8] hover:text-white border border-[#1e2035] hover:border-[#ec4899]/50 rounded-lg transition-all duration-200 hover:bg-[#ec4899]/10"
-                >
-                  ออกจากระบบ
-                </button>
+                <div className="relative">
+                  <button
+                    onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
+                    className="p-2 text-[#94a3b8] hover:text-[#00d4ff] transition-colors rounded-lg hover:bg-[#00d4ff]/10"
+                    title="ตั้งค่าบัญชีผู้ใช้"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                  </button>
+                  
+                  {/* Desktop Profile Dropdown */}
+                  {profileDropdownOpen && (
+                    <div className="absolute right-0 mt-2 w-48 bg-[#1e2035] border border-[#3b3e66] rounded-xl shadow-lg py-1 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                      <button
+                        onClick={() => { setProfileModalOpen(true); setProfileDropdownOpen(false); }}
+                        className="w-full text-left px-4 py-2 text-sm text-[#94a3b8] hover:text-white hover:bg-[#3b3e66]/50"
+                      >
+                        แก้ไขข้อมูลส่วนตัว
+                      </button>
+                      <button
+                        onClick={() => { setProfileModalOpen(true); setProfileDropdownOpen(false); }}
+                        className="w-full text-left px-4 py-2 text-sm text-[#94a3b8] hover:text-white hover:bg-[#3b3e66]/50"
+                      >
+                        เปลี่ยนรหัสผ่าน
+                      </button>
+                      <div className="h-px bg-[#3b3e66] my-1"></div>
+                      <button
+                        onClick={() => signOut({ callbackUrl: '/login' })}
+                        className="w-full text-left px-4 py-2 text-sm text-[#ec4899] hover:bg-[#ec4899]/10"
+                      >
+                        ออกจากระบบ
+                      </button>
+                    </div>
+                  )}
+                </div>
               </>
             ) : (
               <>
@@ -176,12 +213,20 @@ export default function Navbar() {
             )}
             <div className="pt-2 border-t border-[#1e2035] space-y-2">
               {session ? (
-                <button
-                  onClick={() => signOut({ callbackUrl: '/login' })}
-                  className="w-full text-left px-4 py-3 text-sm text-[#ec4899] hover:bg-[#ec4899]/10 rounded-lg"
-                >
-                  ออกจากระบบ
-                </button>
+                <>
+                  <button
+                    onClick={() => { setProfileModalOpen(true); setMobileOpen(false); }}
+                    className="w-full text-left block px-4 py-3 text-sm text-[#94a3b8] hover:text-white hover:bg-white/5 rounded-lg"
+                  >
+                    ตั้งค่าบัญชีผู้ใช้
+                  </button>
+                  <button
+                    onClick={() => signOut({ callbackUrl: '/login' })}
+                    className="w-full text-left px-4 py-3 text-sm text-[#ec4899] hover:bg-[#ec4899]/10 rounded-lg"
+                  >
+                    ออกจากระบบ
+                  </button>
+                </>
               ) : (
                 <>
                   <Link href="/login" onClick={() => setMobileOpen(false)} className="block px-4 py-3 text-sm text-[#94a3b8]">เข้าสู่ระบบ</Link>
@@ -193,5 +238,12 @@ export default function Navbar() {
         )}
       </div>
     </nav>
+
+    <ProfileSettingsModal 
+      isOpen={profileModalOpen} 
+      onClose={() => setProfileModalOpen(false)} 
+      status={status as "authenticated" | "unauthenticated" | "loading"}
+    />
+  </>
   );
 }
