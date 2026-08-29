@@ -1,0 +1,133 @@
+{
+  "receipts": [
+    {
+      "bookingId": "b003",
+      "userId": "u005",
+      "computerId": "pc017",
+      "computerName": "PC-pc017",
+      "zone": "A",
+      "startTime": "2024-08-29T22:00:00.000Z",
+      "endTime": "2024-08-30T02:00:00.000Z",
+      "durationHours": 4,
+      "basePrice": 240,
+      "discountsApplied": [
+        {
+          "type": "happyhour",
+          "label": "Happy Hour (22:00-02:00)",
+          "percent": 20,
+          "amount": 48
+        },
+        {
+          "type": "duration",
+          "label": "เล่นต่อเนื่อง 4+ ชม.",
+          "percent": 15,
+          "amount": 28.8
+        }
+      ],
+      "totalDiscount": 76.8,
+      "finalPrice": 163.2,
+      "paidAt": "2026-08-29T09:32:57.244Z",
+      "paymentMethod": "cash",
+      "staffId": "u003",
+      "id": "r1787995977289_q9cqqby5f"
+    },
+    {
+      "bookingId": "b003",
+      "userId": "u005",
+      "computerId": "pc017",
+      "computerName": "PC-pc017",
+      "zone": "A",
+      "startTime": "2024-08-29T22:00:00.000Z",
+      "endTime": "2024-08-30T02:00:00.000Z",
+      "durationHours": 4,
+      "basePrice": 240,
+      "discountsApplied": [
+        {
+          "type": "happyhour",
+          "label": "Happy Hour (22:00-02:00)",
+          "percent": 20,
+          "amount": 48
+        },
+        {
+          "type": "duration",
+          "label": "เล่นต่อเนื่อง 4+ ชม.",
+          "percent": 15,
+          "amount": 28.8
+        }
+      ],
+      "totalDiscount": 76.8,
+      "finalPrice": 163.2,
+      "paidAt": "2026-08-29T09:32:59.015Z",
+      "paymentMethod": "cash",
+      "staffId": "u003",
+      "id": "r1787995979023_cowkfxq78"
+    },
+    {
+      "bookingId": "b002",
+      "userId": "u006",
+      "computerId": "pc010",
+      "computerName": "PC-pc010",
+      "zone": "A",
+      "startTime": "2024-08-29T11:00:00.000Z",
+      "endTime": "2024-08-29T13:00:00.000Z",
+      "durationHours": 2,
+      "basePrice": 80,
+      "discountsApplied": [],
+      "totalDiscount": 0,
+      "finalPrice": 80,
+      "paidAt": "2026-08-29T09:33:00.964Z",
+      "paymentMethod": "cash",
+      "staffId": "u003",
+      "id": "r1787995980995_deu6bt4ea"
+    },
+    {
+      "bookingId": "b001",
+      "userId": "u005",
+      "computerId": "pc003",
+      "computerName": "PC-pc003",
+      "zone": "A",
+      "startTime": "2024-08-29T10:00:00.000Z",
+      "endTime": "2024-08-29T14:00:00.000Z",
+      "durationHours": 4,
+      "basePrice": 120,
+      "discountsApplied": [
+        {
+          "type": "duration",
+          "label": "เล่นต่อเนื่อง 4+ ชม.",
+          "percent": 15,
+          "amount": 18
+        },
+        {
+          "type": "member",
+          "label": "ส่วนลดสมาชิก Member",
+          "percent": 5,
+          "amount": 5.1
+        }
+      ],
+      "totalDiscount": 23.1,
+      "finalPrice": 96.9,
+      "paidAt": "2026-08-29T09:55:11.158Z",
+      "paymentMethod": "cash",
+      "staffId": "u003",
+      "id": "r1787997311169_bo9c0fvlm"
+    },
+    {
+      "bookingId": "b1787995434544_0w9bpccqd",
+      "userId": "u1787992056849_xlp0htfb9",
+      "computerId": "cld001",
+      "computerName": "PC-cld001",
+      "zone": "A",
+      "startTime": "2026-08-29T03:00:00.000Z",
+      "endTime": "2026-08-29T05:00:00.000Z",
+      "durationHours": 2,
+      "basePrice": 60,
+      "discountsApplied": [],
+      "totalDiscount": 0,
+      "finalPrice": 60,
+      "paidAt": "2026-08-29T09:55:20.907Z",
+      "paymentMethod": "cash",
+      "staffId": "u003",
+      "id": "r1787997320940_3956hf29o"
+    }
+  ]
+}

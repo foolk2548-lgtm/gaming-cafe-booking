@@ -1,0 +1,220 @@
+{
+  "computers": [
+    {
+      "id": "cld001",
+      "name": "Cloud Standard 01",
+      "zone": "A",
+      "pricePerHour": 30,
+      "specs": {
+        "cpu": "4 vCPU (Intel Xeon E-2300)",
+        "gpu": "RTX 3060 12GB (Dedicated)",
+        "ram": "16GB DDR4",
+        "monitor": "Stream via Parsec / Moonlight",
+        "headset": "ใช้อุปกรณ์ส่วนตัว",
+        "extras": "Windows 11 Pro, 100Mbps Uplink, SSD NVMe"
+      },
+      "status": "available",
+      "currentBookingId": null,
+      "remoteInfo": null,
+      "imgUrl": "/images/pc-standard.jpg"
+    },
+    {
+      "id": "cld002",
+      "name": "Cloud Standard 02",
+      "zone": "A",
+      "pricePerHour": 30,
+      "specs": {
+        "cpu": "4 vCPU (Intel Xeon E-2300)",
+        "gpu": "RTX 3060 12GB (Dedicated)",
+        "ram": "16GB DDR4",
+        "monitor": "Stream via Parsec / Moonlight",
+        "headset": "ใช้อุปกรณ์ส่วนตัว",
+        "extras": "Windows 11 Pro, 100Mbps Uplink, SSD NVMe"
+      },
+      "status": "available",
+      "currentBookingId": null,
+      "remoteInfo": null,
+      "imgUrl": "/images/pc-standard.jpg"
+    },
+    {
+      "id": "cld003",
+      "name": "Cloud Standard 03",
+      "zone": "A",
+      "pricePerHour": 30,
+      "specs": {
+        "cpu": "4 vCPU (Intel Xeon E-2300)",
+        "gpu": "RTX 3060 12GB (Dedicated)",
+        "ram": "16GB DDR4",
+        "monitor": "Stream via Parsec / Moonlight",
+        "headset": "ใช้อุปกรณ์ส่วนตัว",
+        "extras": "Windows 11 Pro, 100Mbps Uplink, SSD NVMe"
+      },
+      "status": "occupied",
+      "currentBookingId": "b001",
+      "remoteInfo": null,
+      "imgUrl": "/images/pc-standard.jpg"
+    },
+    {
+      "id": "cld004",
+      "name": "Cloud Standard 04",
+      "zone": "A",
+      "pricePerHour": 30,
+      "specs": {
+        "cpu": "4 vCPU (Intel Xeon E-2300)",
+        "gpu": "RTX 3060 12GB (Dedicated)",
+        "ram": "16GB DDR4",
+        "monitor": "Stream via Parsec / Moonlight",
+        "headset": "ใช้อุปกรณ์ส่วนตัว",
+        "extras": "Windows 11 Pro, 100Mbps Uplink, SSD NVMe"
+      },
+      "status": "available",
+      "currentBookingId": null,
+      "remoteInfo": null,
+      "imgUrl": "/images/pc-standard.jpg"
+    },
+    {
+      "id": "cld005",
+      "name": "Cloud Standard 05",
+      "zone": "A",
+      "pricePerHour": 30,
+      "specs": {
+        "cpu": "4 vCPU (Intel Xeon E-2300)",
+        "gpu": "RTX 3060 12GB (Dedicated)",
+        "ram": "16GB DDR4",
+        "monitor": "Stream via Parsec / Moonlight",
+        "headset": "ใช้อุปกรณ์ส่วนตัว",
+        "extras": "Windows 11 Pro, 100Mbps Uplink, SSD NVMe"
+      },
+      "status": "maintenance",
+      "currentBookingId": null,
+      "remoteInfo": null,
+      "imgUrl": "/images/pc-standard.jpg"
+    },
+    {
+      "id": "cld006",
+      "name": "Cloud Pro 01",
+      "zone": "B",
+      "pricePerHour": 40,
+      "specs": {
+        "cpu": "8 vCPU (Intel Xeon Gold)",
+        "gpu": "RTX 4070 12GB (Dedicated)",
+        "ram": "32GB DDR5",
+        "monitor": "Stream via Parsec / Moonlight (up to 1440p 165fps)",
+        "headset": "ใช้อุปกรณ์ส่วนตัว",
+        "extras": "Windows 11 Pro, 300Mbps Uplink, NVMe RAID"
+      },
+      "status": "available",
+      "currentBookingId": null,
+      "remoteInfo": null,
+      "imgUrl": "/images/pc-gaming.jpg"
+    },
+    {
+      "id": "cld007",
+      "name": "Cloud Pro 02",
+      "zone": "B",
+      "pricePerHour": 40,
+      "specs": {
+        "cpu": "8 vCPU (Intel Xeon Gold)",
+        "gpu": "RTX 4070 12GB (Dedicated)",
+        "ram": "32GB DDR5",
+        "monitor": "Stream via Parsec / Moonlight (up to 1440p 165fps)",
+        "headset": "ใช้อุปกรณ์ส่วนตัว",
+        "extras": "Windows 11 Pro, 300Mbps Uplink, NVMe RAID"
+      },
+      "status": "occupied",
+      "currentBookingId": "b002",
+      "remoteInfo": null,
+      "imgUrl": "/images/pc-gaming.jpg"
+    },
+    {
+      "id": "cld008",
+      "name": "Cloud Pro 03",
+      "zone": "B",
+      "pricePerHour": 40,
+      "specs": {
+        "cpu": "8 vCPU (Intel Xeon Gold)",
+        "gpu": "RTX 4070 12GB (Dedicated)",
+        "ram": "32GB DDR5",
+        "monitor": "Stream via Parsec / Moonlight (up to 1440p 165fps)",
+        "headset": "ใช้อุปกรณ์ส่วนตัว",
+        "extras": "Windows 11 Pro, 300Mbps Uplink, NVMe RAID"
+      },
+      "status": "available",
+      "currentBookingId": null,
+      "remoteInfo": null,
+      "imgUrl": "/images/pc-gaming.jpg"
+    },
+    {
+      "id": "cld009",
+      "name": "Cloud Pro 04",
+      "zone": "B",
+      "pricePerHour": 40,
+      "specs": {
+        "cpu": "8 vCPU (Intel Xeon Gold)",
+        "gpu": "RTX 4070 12GB (Dedicated)",
+        "ram": "32GB DDR5",
+        "monitor": "Stream via Parsec / Moonlight (up to 1440p 165fps)",
+        "headset": "ใช้อุปกรณ์ส่วนตัว",
+        "extras": "Windows 11 Pro, 300Mbps Uplink, NVMe RAID"
+      },
+      "status": "available",
+      "currentBookingId": null,
+      "remoteInfo": null,
+      "imgUrl": "/images/pc-gaming.jpg"
+    },
+    {
+      "id": "cld010",
+      "name": "Cloud Ultra VIP 01",
+      "zone": "VIP",
+      "pricePerHour": 60,
+      "specs": {
+        "cpu": "16 vCPU (Intel Xeon Platinum)",
+        "gpu": "RTX 4090 24GB (Dedicated)",
+        "ram": "64GB DDR5 ECC",
+        "monitor": "Stream 4K/240fps via Parsec",
+        "headset": "ใช้อุปกรณ์ส่วนตัว",
+        "extras": "Windows 11 Pro, 1Gbps Uplink, NVMe RAID, Priority Queue"
+      },
+      "status": "available",
+      "currentBookingId": null,
+      "remoteInfo": null,
+      "imgUrl": "/images/pc-vip.jpg"
+    },
+    {
+      "id": "cld011",
+      "name": "Cloud Ultra VIP 02",
+      "zone": "VIP",
+      "pricePerHour": 60,
+      "specs": {
+        "cpu": "16 vCPU (Intel Xeon Platinum)",
+        "gpu": "RTX 4090 24GB (Dedicated)",
+        "ram": "64GB DDR5 ECC",
+        "monitor": "Stream 4K/240fps via Parsec",
+        "headset": "ใช้อุปกรณ์ส่วนตัว",
+        "extras": "Windows 11 Pro, 1Gbps Uplink, NVMe RAID, Priority Queue"
+      },
+      "status": "occupied",
+      "currentBookingId": "b003",
+      "remoteInfo": null,
+      "imgUrl": "/images/pc-vip.jpg"
+    },
+    {
+      "id": "cld012",
+      "name": "Cloud Ultra VIP 03",
+      "zone": "VIP",
+      "pricePerHour": 60,
+      "specs": {
+        "cpu": "16 vCPU (Intel Xeon Platinum)",
+        "gpu": "RTX 4090 24GB (Dedicated)",
+        "ram": "64GB DDR5 ECC",
+        "monitor": "Stream 4K/240fps via Parsec",
+        "headset": "ใช้อุปกรณ์ส่วนตัว",
+        "extras": "Windows 11 Pro, 1Gbps Uplink, NVMe RAID, Priority Queue"
+      },
+      "status": "available",
+      "currentBookingId": null,
+      "remoteInfo": null,
+      "imgUrl": "/images/pc-vip.jpg"
+    }
+  ]
+}

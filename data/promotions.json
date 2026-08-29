@@ -1,0 +1,40 @@
+{
+  "promotions": [
+    {
+      "id": "promo001",
+      "type": "time_based",
+      "label": "ช่วงเวลากลางวัน",
+      "description": "จันทร์-ศุกร์ 09:00-15:00 น.",
+      "discountPercent": 20,
+      "condition": { "days": [1,2,3,4,5], "startHour": 9, "endHour": 15 },
+      "isActive": true
+    },
+    {
+      "id": "promo002",
+      "type": "duration_based",
+      "label": "เล่นยาว ได้ลด",
+      "description": "เล่นต่อเนื่อง 4 ชั่วโมงขึ้นไป",
+      "discountPercent": 15,
+      "condition": { "minHours": 4 },
+      "isActive": true
+    },
+    {
+      "id": "promo003",
+      "type": "happy_hour",
+      "label": "Happy Hour",
+      "description": "ดึกดื่น 22:00 - 02:00 น.",
+      "discountPercent": 20,
+      "condition": { "startHour": 22, "endHour": 2 },
+      "isActive": true
+    },
+    {
+      "id": "promo004",
+      "type": "new_member_bill",
+      "label": "ส่วนลดสมาชิกใหม่",
+      "description": "สมาชิกใหม่ บิลแรก 600 บาทขึ้นไป ลด 100 บาท",
+      "discountAmount": 100,
+      "condition": { "minBill": 600, "isNewMember": true, "firstBillOnly": true },
+      "isActive": true
+    }
+  ]
+}

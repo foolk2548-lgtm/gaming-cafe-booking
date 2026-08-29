@@ -1,0 +1,70 @@
+{
+  "memberships": [
+    {
+      "id": "m001",
+      "userId": "u005",
+      "tier": "member",
+      "discountPercent": 5,
+      "startDate": "2024-06-01",
+      "expiryDate": "2025-06-01",
+      "totalSpent": 2873.2999999999997,
+      "points": 286,
+      "bookingCount": 21
+    },
+    {
+      "id": "m002",
+      "userId": "u006",
+      "tier": "member",
+      "discountPercent": 5,
+      "startDate": "2024-08-01",
+      "expiryDate": "2025-08-01",
+      "totalSpent": 80,
+      "points": 8,
+      "bookingCount": 1
+    }
+  ],
+  "tiers": [
+    {
+      "tier": "member",
+      "label": "Member",
+      "discountPercent": 5,
+      "color": "blue",
+      "minSpend": 0,
+      "price": 299,
+      "perks": [
+        "ส่วนลด 5% ทุกครั้ง",
+        "สะสมแต้ม 1 แต้ม/10 บาท",
+        "จองล่วงหน้าได้ 3 วัน"
+      ]
+    },
+    {
+      "tier": "vip",
+      "label": "VIP",
+      "discountPercent": 10,
+      "color": "purple",
+      "minSpend": 5000,
+      "price": 699,
+      "perks": [
+        "ส่วนลด 10% ทุกครั้ง",
+        "สะสมแต้ม 1.5 แต้ม/10 บาท",
+        "จองล่วงหน้าได้ 7 วัน",
+        "เข้าใช้ VIP Zone ฟรี 1 ชม./เดือน"
+      ]
+    },
+    {
+      "tier": "premium",
+      "label": "Premium",
+      "discountPercent": 15,
+      "color": "gold",
+      "minSpend": 15000,
+      "price": 1299,
+      "perks": [
+        "ส่วนลด 15% ทุกครั้ง",
+        "สะสมแต้ม 2 แต้ม/10 บาท",
+        "จองล่วงหน้าได้ 14 วัน",
+        "เข้าใช้ VIP Zone ฟรี 3 ชม./เดือน",
+        "เครื่องดื่มฟรี 1 แก้ว/วิสิต"
+      ]
+    }
+  ]
+}
