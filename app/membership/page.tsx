@@ -97,7 +97,7 @@ export default function MembershipPage() {
   const currentTierData = tiers.find((t) => t.tier === membership?.tier);
 
   if (status === 'loading') return (
-    <div className="min-h-screen"><Navbar /><div className="p-8 text-center text-[#94a3b8]">⏳ กำลังโหลด...</div></div>
+    <div className="min-h-screen"><Navbar /><div className="p-8 text-center text-muted-foreground">⏳ กำลังโหลด...</div></div>
   );
 
   return (
@@ -105,8 +105,8 @@ export default function MembershipPage() {
       <Navbar />
       <div className="mx-auto max-w-6xl px-4 py-10 page-enter">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-black text-white mb-3">ระบบสมาชิก</h1>
-          <p className="text-[#94a3b8] max-w-xl mx-auto">เลือกแพ็กเกจที่เหมาะกับคุณ รับส่วนลดและสิทธิพิเศษสุดคุ้ม</p>
+          <h1 className="text-4xl font-extrabold text-foreground mb-3">ระบบสมาชิก</h1>
+          <p className="text-muted-foreground max-w-xl mx-auto">เลือกแพ็กเกจที่เหมาะกับคุณ รับส่วนลดและสิทธิพิเศษสุดคุ้ม</p>
         </div>
 
         {success && (
@@ -117,33 +117,33 @@ export default function MembershipPage() {
 
         {/* Current membership banner */}
         {membership && (
-          <div className="mb-10 card-neon p-6 border border-[#8b5cf6]/30 bg-gradient-to-br from-[#8b5cf6]/10 to-[#00d4ff]/5">
+          <div className="mb-10 card-clean p-6 border border-border">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div>
-                <div className="text-sm text-[#94a3b8] mb-1">สถานะสมาชิกปัจจุบัน</div>
+                <div className="text-sm text-muted-foreground mb-1">สถานะสมาชิกปัจจุบัน</div>
                 <div className="flex items-center gap-3">
-                  <span className="text-2xl font-black text-white">{tierInfo[membership.tier]?.label ?? membership.tier}</span>
+                  <span className="text-2xl font-extrabold text-foreground">{tierInfo[membership.tier]?.label ?? membership.tier}</span>
                   <span className={`px-3 py-1 rounded-full text-sm font-semibold ${tierInfo[membership.tier]?.badge}`}>Active</span>
                 </div>
-                <div className="text-xs text-[#475569] mt-1">หมดอายุ: {membership.expiryDate}</div>
+                <div className="text-xs text-muted-foreground mt-1">หมดอายุ: {membership.expiryDate}</div>
               </div>
               <div className="grid grid-cols-3 gap-6 text-center">
                 <div>
-                  <div className="text-2xl font-black text-[#00d4ff]">{membership.totalSpent.toFixed(0)}</div>
-                  <div className="text-xs text-[#94a3b8]">ยอดรวม (฿)</div>
+                  <div className="text-2xl font-extrabold text-primary-600 dark:text-primary-400">{membership.totalSpent.toFixed(0)}</div>
+                  <div className="text-xs text-muted-foreground">ยอดรวม (฿)</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-black text-[#8b5cf6]">{membership.points}</div>
-                  <div className="text-xs text-[#94a3b8]">แต้มสะสม</div>
+                  <div className="text-2xl font-extrabold text-purple-600 dark:text-purple-400">{membership.points}</div>
+                  <div className="text-xs text-muted-foreground">แต้มสะสม</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-black text-white">{membership.bookingCount}</div>
-                  <div className="text-xs text-[#94a3b8]">ครั้งที่จอง</div>
+                  <div className="text-2xl font-extrabold text-foreground">{membership.bookingCount}</div>
+                  <div className="text-xs text-muted-foreground">ครั้งที่จอง</div>
                 </div>
               </div>
             </div>
             {/* Cancel button */}
-            <div className="mt-4 pt-4 border-t border-[#1e2035] flex justify-end">
+            <div className="mt-4 pt-4 border-t border-border flex justify-end">
               <button
                 onClick={() => setCancelConfirm(true)}
                 className="text-xs px-4 py-2 rounded-lg border border-red-500/30 text-red-400 hover:bg-red-500/10 transition-all"
@@ -159,9 +159,9 @@ export default function MembershipPage() {
           {tiers.map((t) => {
             const isCurrentTier = membership?.tier === t.tier;
             return (
-              <div key={t.tier} className={`card-neon border p-6 bg-gradient-to-b ${t.color} ${t.border} ${isCurrentTier ? 'ring-2 ring-[#8b5cf6]/50' : ''}`}>
+              <div key={t.tier} className={`card-clean border p-6 ${isCurrentTier ? 'ring-2 ring-primary-500/50' : 'border-border'}`}>
                 {isCurrentTier && (
-                  <div className="text-center mb-3 text-xs font-semibold text-[#8b5cf6] bg-[#8b5cf6]/10 border border-[#8b5cf6]/20 rounded-full py-1">
+                  <div className="text-center mb-3 text-xs font-semibold text-primary-600 dark:text-primary-400 bg-primary-500/10 border border-primary-500/20 rounded-full py-1">
                     ✓ แพ็กเกจของคุณ
                   </div>
                 )}
@@ -170,16 +170,16 @@ export default function MembershipPage() {
                     {t.label}
                   </span>
                   <div className="mt-4">
-                    <span className="text-4xl font-black text-white">{t.price}</span>
-                    <span className="text-[#94a3b8] text-sm ml-1">บาท/ปี</span>
+                    <span className="text-4xl font-extrabold text-foreground">{t.price}</span>
+                    <span className="text-muted-foreground text-sm ml-1">บาท/ปี</span>
                   </div>
-                  <div className="text-[#00d4ff] font-bold mt-1">ส่วนลด {t.discount}% ทุกครั้ง</div>
+                  <div className="text-primary-600 dark:text-primary-400 font-bold mt-1">ส่วนลด {t.discount}% ทุกครั้ง</div>
                 </div>
 
                 <ul className="space-y-2 mb-6">
                   {t.perks.map((p) => (
-                    <li key={p} className="flex items-start gap-2 text-sm text-[#94a3b8]">
-                      <span className="text-green-400 shrink-0">✓</span>
+                    <li key={p} className="flex items-start gap-2 text-sm text-muted-foreground">
+                      <span className="text-green-600 dark:text-green-400 shrink-0">✓</span>
                       {p}
                     </li>
                   ))}
@@ -191,10 +191,10 @@ export default function MembershipPage() {
                     if (!isCurrentTier && !loading) setPaymentTier(t.tier);
                   }}
                   disabled={isCurrentTier || loading || joining === t.tier}
-                  className={`w-full py-3 rounded-xl font-bold text-sm transition-all ${
+                  className={`w-full py-3 rounded-xl text-sm transition-all ${
                     isCurrentTier
-                      ? 'bg-[#8b5cf6]/20 text-[#8b5cf6] border border-[#8b5cf6]/30 cursor-default'
-                      : 'btn-cyber hover:shadow-lg'
+                      ? 'bg-muted text-muted-foreground cursor-default'
+                      : 'btn-primary hover:shadow-md'
                   }`}
                 >
                   {isCurrentTier ? '✓ แพ็กเกจปัจจุบัน' : joining === t.tier ? '⏳ กำลังดำเนินการ...' : membership ? `เปลี่ยนเป็น ${t.label}` : `สมัคร ${t.label}`}
@@ -205,10 +205,10 @@ export default function MembershipPage() {
         </div>
 
         {/* New member perk */}
-        <div className="mt-10 card-neon p-6 border border-green-500/30 bg-gradient-to-r from-green-500/10 to-transparent text-center">
+        <div className="mt-10 card-clean p-6 border border-green-500/30 bg-green-500/5 text-center">
           <div className="text-2xl mb-2">🎁</div>
-          <h3 className="text-white font-bold mb-1">โบนัสสมาชิกใหม่</h3>
-          <p className="text-[#94a3b8] text-sm">สมัครสมาชิกแล้วรับส่วนลด <span className="text-green-400 font-bold">100 บาท</span> สำหรับบิลแรกที่ 600 บาทขึ้นไปโดยอัตโนมัติ!</p>
+          <h3 className="text-foreground font-bold mb-1">โบนัสสมาชิกใหม่</h3>
+          <p className="text-muted-foreground text-sm">สมัครสมาชิกแล้วรับส่วนลด <span className="text-green-600 dark:text-green-400 font-bold">100 บาท</span> สำหรับบิลแรกที่ 600 บาทขึ้นไปโดยอัตโนมัติ!</p>
         </div>
       </div>
 
@@ -217,37 +217,37 @@ export default function MembershipPage() {
         const tierData = tiers.find((t) => t.tier === paymentTier)!;
         return (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4">
-            <div className="card-neon border border-[#00d4ff]/30 p-8 w-full max-w-sm page-enter bg-[#0a0a1a] text-center">
-              <h3 className="text-xl font-black text-white mb-1">
+            <div className="card-clean border border-border p-8 w-full max-w-sm page-enter bg-card text-center">
+              <h3 className="text-xl font-extrabold text-foreground mb-1">
                 {membership ? `เปลี่ยนเป็น ${tierData.label}` : `สมัคร ${tierData.label}`}
               </h3>
-              <p className="text-[#94a3b8] text-sm mb-3">สแกน QR Code ด้านล่างเพื่อชำระเงินผ่าน PromptPay</p>
+              <p className="text-muted-foreground text-sm mb-3">สแกน QR Code ด้านล่างเพื่อชำระเงินผ่าน PromptPay</p>
 
               {/* Amount box */}
-              <div className="mb-4 py-3 px-4 rounded-xl bg-[#00d4ff]/10 border border-[#00d4ff]/30 inline-block w-full">
-                <div className="text-xs text-[#94a3b8] mb-1">ยอดชำระ</div>
-                <div className="text-3xl font-black text-[#00d4ff]">฿{tierData.price.toLocaleString()}</div>
-                <div className="text-xs text-[#94a3b8] mt-0.5">บาท / ปี</div>
+              <div className="mb-4 py-3 px-4 rounded-xl bg-primary-500/10 border border-primary-500/30 inline-block w-full">
+                <div className="text-xs text-muted-foreground mb-1">ยอดชำระ</div>
+                <div className="text-3xl font-extrabold text-primary-600 dark:text-primary-400">฿{tierData.price.toLocaleString()}</div>
+                <div className="text-xs text-muted-foreground mt-0.5">บาท / ปี</div>
               </div>
 
-              <div className="bg-white p-4 rounded-xl inline-block mb-5 shadow-[0_0_30px_rgba(0,212,255,0.2)]">
+              <div className="bg-white p-4 rounded-xl inline-block mb-5 shadow-sm border border-border">
                 <PromptPayQR amount={tierData.price} size={220} />
               </div>
 
-              <p className="text-xs text-[#475569] mb-5">โอนเงินแล้วกด &quot;ยืนยันการชำระเงิน&quot; ด้านล่าง</p>
+              <p className="text-xs text-muted-foreground mb-5">โอนเงินแล้วกด &quot;ยืนยันการชำระเงิน&quot; ด้านล่าง</p>
 
               <div className="flex gap-3">
                 <button
                   onClick={() => setPaymentTier(null)}
                   disabled={joining !== null}
-                  className="flex-1 py-3 rounded-xl border border-[#1e2035] text-[#94a3b8] hover:text-white hover:bg-[#1e2035] transition-all text-sm font-semibold disabled:opacity-50"
+                  className="flex-1 py-3 rounded-xl border border-border text-muted-foreground hover:text-foreground hover:bg-muted transition-all text-sm font-semibold disabled:opacity-50"
                 >
                   ยกเลิก
                 </button>
                 <button
                   onClick={() => handleJoin(paymentTier)}
                   disabled={joining !== null}
-                  className="flex-1 py-3 rounded-xl bg-gradient-to-r from-[#8b5cf6] to-[#00d4ff] text-white font-bold hover:shadow-[0_0_20px_rgba(0,212,255,0.4)] transition-all text-sm disabled:opacity-50"
+                  className="flex-1 py-3 btn-primary disabled:opacity-50"
                 >
                   {joining === paymentTier ? '⏳ กำลังตรวจสอบ...' : '✅ ยืนยันการชำระเงิน'}
                 </button>
@@ -260,18 +260,18 @@ export default function MembershipPage() {
       {/* Cancel Confirm Modal */}
       {cancelConfirm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4">
-          <div className="card-neon border border-red-500/30 p-8 w-full max-w-sm page-enter bg-[#0a0a1a] text-center">
+          <div className="card-clean border border-red-500/30 p-8 w-full max-w-sm page-enter bg-card text-center">
             <div className="text-4xl mb-4">⚠️</div>
-            <h3 className="text-xl font-black text-white mb-2">ยืนยันการยกเลิกสมาชิก</h3>
-            <p className="text-[#94a3b8] text-sm mb-2">
-              คุณกำลังจะยกเลิกแพ็กเกจ <span className="text-white font-bold">{tierInfo[membership?.tier ?? '']?.label}</span>
+            <h3 className="text-xl font-extrabold text-foreground mb-2">ยืนยันการยกเลิกสมาชิก</h3>
+            <p className="text-muted-foreground text-sm mb-2">
+              คุณกำลังจะยกเลิกแพ็กเกจ <span className="text-foreground font-bold">{tierInfo[membership?.tier ?? '']?.label}</span>
             </p>
-            <p className="text-red-400 text-xs mb-6">แต้มสะสมและสิทธิ์ส่วนลดทั้งหมดจะถูกยกเลิก</p>
+            <p className="text-red-600 dark:text-red-400 text-xs mb-6">แต้มสะสมและสิทธิ์ส่วนลดทั้งหมดจะถูกยกเลิก</p>
             <div className="flex gap-3">
               <button
                 onClick={() => setCancelConfirm(false)}
                 disabled={cancelling}
-                className="flex-1 py-3 rounded-xl border border-[#1e2035] text-[#94a3b8] hover:text-white hover:bg-[#1e2035] transition-all text-sm font-semibold"
+                className="flex-1 py-3 rounded-xl border border-border text-muted-foreground hover:text-foreground hover:bg-muted transition-all text-sm font-semibold"
               >
                 ไม่ยกเลิก
               </button>

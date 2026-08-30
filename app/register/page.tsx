@@ -52,18 +52,18 @@ export default function RegisterPage() {
       <div className="w-full max-w-md page-enter">
         <div className="text-center mb-8">
           <Link href="/" className="inline-block">
-            <h1 className="text-3xl font-black tracking-wider" style={{ fontFamily: 'Orbitron' }}>
-              CLOUD<span className="text-[#00d4ff]">SPACE</span>
+            <h1 className="text-3xl font-extrabold tracking-wider">
+              CLOUD<span className="text-primary-600 dark:text-primary-400">SPACE</span>
             </h1>
           </Link>
-          <p className="text-[#94a3b8] mt-2">สมัครสมาชิกเพื่อเช่า Cloud PC</p>
+          <p className="text-muted-foreground mt-2">สมัครสมาชิกเพื่อเช่า Cloud PC</p>
         </div>
 
-        <div className="card-neon p-8 border border-[#1e2035]">
-          <h2 className="text-xl font-bold text-white mb-6">สมัครสมาชิก</h2>
+        <div className="card-clean p-8 border border-border">
+          <h2 className="text-xl font-bold text-foreground mb-6">สมัครสมาชิก</h2>
 
           {error && (
-            <div className="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-sm">
+            <div className="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400 text-sm">
               ⚠️ {error}
             </div>
           )}
@@ -71,7 +71,7 @@ export default function RegisterPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             {fields.map((f) => (
               <div key={f.name}>
-                <label className="block text-sm text-[#94a3b8] mb-1.5">{f.label}</label>
+                <label className="block text-sm text-muted-foreground mb-1.5">{f.label}</label>
                 <input
                   id={f.name}
                   name={f.name}
@@ -79,14 +79,14 @@ export default function RegisterPage() {
                   value={form[f.name as keyof typeof form]}
                   onChange={handleChange}
                   required={f.name !== 'phone'}
-                  className="input-cyber w-full px-4 py-3 rounded-lg border text-sm"
+                  className="input-clean w-full px-4 py-3 rounded-lg border text-sm"
                   placeholder={f.placeholder}
                 />
               </div>
             ))}
 
             {/* Perks reminder */}
-            <div className="p-3 rounded-lg bg-green-500/10 border border-green-500/20 text-xs text-green-400">
+            <div className="p-3 rounded-lg bg-green-500/10 border border-green-500/20 text-xs text-green-600 dark:text-green-400">
               🎁 สมาชิกใหม่รับส่วนลด <strong>100 บาท</strong> สำหรับบิลแรกที่ 600 บาทขึ้นไป!
             </div>
 
@@ -94,15 +94,15 @@ export default function RegisterPage() {
               id="register-submit"
               type="submit"
               disabled={loading}
-              className="btn-cyber w-full py-3 rounded-lg font-bold text-sm disabled:opacity-50"
+              className="btn-primary w-full py-3 rounded-lg text-sm disabled:opacity-50"
             >
               {loading ? '⏳ กำลังสมัคร...' : '🚀 สมัครสมาชิก'}
             </button>
           </form>
 
-          <p className="text-center text-sm text-[#94a3b8] mt-6">
+          <p className="text-center text-sm text-muted-foreground mt-6">
             มีบัญชีแล้ว?{' '}
-            <Link href="/login" className="text-[#00d4ff] hover:underline">เข้าสู่ระบบ</Link>
+            <Link href="/login" className="text-primary-600 dark:text-primary-400 hover:underline">เข้าสู่ระบบ</Link>
           </p>
         </div>
       </div>

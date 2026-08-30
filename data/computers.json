@@ -49,10 +49,11 @@
         "headset": "ใช้อุปกรณ์ส่วนตัว",
         "extras": "Windows 11 Pro, 100Mbps Uplink, SSD NVMe"
       },
-      "status": "available",
+      "status": "maintenance",
       "currentBookingId": null,
       "remoteInfo": null,
-      "imgUrl": "/images/pc-standard.jpg"
+      "imgUrl": "/images/pc-standard.jpg",
+      "maintenanceReason": "เครื่องฟิสสตาทไม่ค่อยติด"
     },
     {
       "id": "cld004",
@@ -85,8 +86,8 @@
         "headset": "ใช้อุปกรณ์ส่วนตัว",
         "extras": "Windows 11 Pro, 100Mbps Uplink, SSD NVMe"
       },
-      "status": "available",
-      "currentBookingId": null,
+      "status": "occupied",
+      "currentBookingId": "b1788095735463_88mrd95c2",
       "remoteInfo": null,
       "imgUrl": "/images/pc-standard.jpg"
     },

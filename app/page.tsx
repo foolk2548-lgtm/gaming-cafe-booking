@@ -34,45 +34,32 @@ export default async function HomePage() {
       {/* Hero Section */}
       <section className="relative overflow-hidden px-4 py-24 text-center">
         {/* Background effects */}
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-[120px]" />
-          <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-400/10 rounded-full blur-[120px]" />
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-48 bg-pink-600/8 rounded-full blur-[100px]" />
-        </div>
+        <div className="absolute inset-0 -z-10 bg-background transition-colors" />
 
-        {/* Grid pattern */}
-        <div
-          className="absolute inset-0 -z-10 opacity-[0.03]"
-          style={{
-            backgroundImage: 'linear-gradient(#8b5cf6 1px, transparent 1px), linear-gradient(90deg, #8b5cf6 1px, transparent 1px)',
-            backgroundSize: '50px 50px',
-          }}
-        />
-
-        <div className="mx-auto max-w-5xl page-enter">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#8b5cf6]/30 bg-[#8b5cf6]/10 px-4 py-2 text-sm text-[#8b5cf6]">
-            <span className="h-2 w-2 rounded-full bg-[#00ff88] animate-pulse" />
+        <div className="mx-auto max-w-5xl page-enter mt-10">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-muted px-4 py-2 text-sm text-foreground shadow-sm">
+            <span className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
             ระบบเช่า Cloud PC ออนไลน์ — เปิดให้บริการ 24/7
           </div>
 
-          <h1 className="mb-6 text-5xl font-black leading-tight tracking-tight md:text-7xl">
-            <span className="gradient-text">CLOUD SPACE</span>
+          <h1 className="mb-6 text-5xl font-extrabold leading-tight tracking-tight md:text-7xl">
+            <span className="text-primary-600 dark:text-primary-400">CLOUD SPACE</span>
             <br />
-            <span className="text-white">พลังประมวลผลที่คุณเข้าถึงได้</span>
+            <span className="text-foreground">พลังประมวลผลที่คุณเข้าถึงได้</span>
           </h1>
 
-          <p className="mx-auto mb-10 max-w-2xl text-lg text-[#94a3b8] leading-relaxed">
-            เช่า Cloud PC ประสิทธิภาพสูงออนไลน์ได้ทันที เลือกระดับที่ต้องการ กำหนดเวลา รับส่วนลดสูงสุด <span className="text-[#00d4ff] font-semibold">35%</span> พร้อมระบบสมาชิกสุดคุ้ม
+          <p className="mx-auto mb-10 max-w-2xl text-lg text-muted-foreground leading-relaxed">
+            เช่า Cloud PC ประสิทธิภาพสูงออนไลน์ได้ทันที เลือกระดับที่ต้องการ กำหนดเวลา รับส่วนลดสูงสุด <span className="text-primary-600 dark:text-primary-400 font-semibold">35%</span> พร้อมระบบสมาชิกสุดคุ้ม
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Link href="/booking" className="btn-cyber px-8 py-4 rounded-xl text-lg font-bold flex items-center justify-center gap-2">
+            <Link href="/booking" className="btn-primary px-8 py-4 text-lg flex items-center justify-center gap-2">
               ☁️ เช่า Cloud PC
             </Link>
-            <Link href="/membership" className="px-8 py-4 rounded-xl text-lg font-bold border border-[#8b5cf6]/50 text-[#8b5cf6] hover:bg-[#8b5cf6]/10 transition-all flex items-center justify-center gap-2">
+            <Link href="/membership" className="px-8 py-4 rounded-xl text-lg font-bold border border-border text-foreground hover:bg-muted transition-all flex items-center justify-center gap-2">
               💎 แพ็กเกจสมาชิก
             </Link>
-            <a href="#promotions" className="px-8 py-4 rounded-xl text-lg font-bold border border-[#00d4ff]/50 text-[#00d4ff] hover:bg-[#00d4ff]/10 transition-all flex items-center justify-center gap-2">
+            <a href="#promotions" className="px-8 py-4 rounded-xl text-lg font-bold border border-border text-foreground hover:bg-muted transition-all flex items-center justify-center gap-2">
               🎁 ดูโปรโมชั่น
             </a>
           </div>
@@ -84,9 +71,9 @@ export default async function HomePage() {
               { label: 'เปิดบริการ', value: '24', unit: 'ชม./วัน' },
               { label: 'โปรโมชั่น', value: '5', unit: 'รูปแบบ' },
             ].map((stat) => (
-              <div key={stat.label} className="text-center">
-                <div className="text-3xl font-black text-[#00d4ff]" style={{ fontFamily: 'Orbitron' }}>{stat.value}</div>
-                <div className="text-xs text-[#94a3b8] mt-1">{stat.unit}<br />{stat.label}</div>
+              <div key={stat.label} className="text-center card-clean p-4">
+                <div className="text-3xl font-extrabold text-primary-600 dark:text-primary-400">{stat.value}</div>
+                <div className="text-xs text-muted-foreground mt-1">{stat.unit}<br />{stat.label}</div>
               </div>
             ))}
           </div>
@@ -94,19 +81,19 @@ export default async function HomePage() {
       </section>
 
       {/* Promotions */}
-      <section id="promotions" className="px-4 py-16">
+      <section id="promotions" className="px-4 py-16 bg-muted/30">
         <div className="mx-auto max-w-7xl">
           <div className="text-center mb-10">
-            <h2 className="text-3xl font-black text-white mb-3">โปรโมชั่นพิเศษ</h2>
-            <p className="text-[#94a3b8]">ส่วนลดคำนวณแบบซ้อนกัน ยิ่งครบเงื่อนไข ยิ่งประหยัด!</p>
+            <h2 className="text-3xl font-bold text-foreground mb-3">โปรโมชั่นพิเศษ</h2>
+            <p className="text-muted-foreground">ส่วนลดคำนวณแบบซ้อนกัน ยิ่งครบเงื่อนไข ยิ่งประหยัด!</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             {promotions.map((promo) => (
-              <div key={promo.label} className={`card-neon p-5 text-center bg-gradient-to-b ${promo.color} border ${promo.border}`}>
+              <div key={promo.label} className="card-clean p-5 text-center flex flex-col items-center">
                 <div className="text-3xl mb-3">{promo.icon}</div>
-                <div className="text-2xl font-black text-white mb-1" style={{ fontFamily: 'Orbitron' }}>{promo.discount}</div>
-                <div className="text-sm font-semibold text-white mb-1">{promo.label}</div>
-                <div className="text-xs text-[#94a3b8]">{promo.desc}</div>
+                <div className="text-2xl font-extrabold text-primary-600 dark:text-primary-400 mb-1">{promo.discount}</div>
+                <div className="text-sm font-semibold text-foreground mb-1">{promo.label}</div>
+                <div className="text-xs text-muted-foreground">{promo.desc}</div>
               </div>
             ))}
           </div>
@@ -114,30 +101,30 @@ export default async function HomePage() {
       </section>
 
       {/* Zones */}
-      <section className="px-4 py-16 bg-[#0a0a1a]/50">
+      <section className="px-4 py-16">
         <div className="mx-auto max-w-7xl">
           <div className="text-center mb-10">
-            <h2 className="text-3xl font-black text-white mb-3">แพ็กเกจ Cloud PC</h2>
-            <p className="text-[#94a3b8]">3 ระดับ ตอบโจทย์ทุกการใช้งาน</p>
+            <h2 className="text-3xl font-bold text-foreground mb-3">แพ็กเกจ Cloud PC</h2>
+            <p className="text-muted-foreground">3 ระดับ ตอบโจทย์ทุกการใช้งาน</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {zones.map((zone) => (
-              <div key={zone.name} className={`card-neon p-6 border ${zone.border}`}>
-                <div className={`inline-block px-3 py-1 rounded-full text-xs font-bold mb-4 ${zone.bg} ${zone.color}`}>
+              <div key={zone.name} className="card-clean p-6 flex flex-col relative overflow-hidden">
+                <div className={`inline-flex self-start px-3 py-1 rounded-full text-xs font-bold mb-4 ${zone.bg} ${zone.color} border ${zone.border}`}>
                   {zone.label}
                 </div>
-                <h3 className={`text-2xl font-black mb-2 ${zone.color}`} style={{ fontFamily: 'Orbitron' }}>{zone.name}</h3>
-                <p className="text-[#94a3b8] text-sm mb-4">{zone.specs}</p>
-                <div className="flex items-center justify-between">
+                <h3 className="text-2xl font-bold mb-2 text-foreground">{zone.name}</h3>
+                <p className="text-muted-foreground text-sm mb-4">{zone.specs}</p>
+                <div className="flex items-center justify-between mt-auto pt-4 border-t border-border">
                   <div>
-                    <span className="text-3xl font-black text-white">{zone.price}</span>
-                    <span className="text-[#94a3b8] text-sm ml-1">บาท/ชม.</span>
+                    <span className="text-3xl font-extrabold text-foreground">{zone.price}</span>
+                    <span className="text-muted-foreground text-sm ml-1">บาท/ชม.</span>
                   </div>
-                  <span className="text-xs text-[#94a3b8]">{zone.count} VMs</span>
+                  <span className="text-xs text-muted-foreground">{zone.count} VMs</span>
                 </div>
                 <Link
                   href={`/booking`}
-                  className={`mt-4 w-full block text-center py-2 rounded-lg text-sm font-semibold border ${zone.border} ${zone.color} hover:${zone.bg} transition-all`}
+                  className="mt-6 w-full btn-primary text-center py-3 block"
                 >
                   เลือกแพ็กเกจนี้ →
                 </Link>
@@ -148,17 +135,17 @@ export default async function HomePage() {
       </section>
 
       {/* Features */}
-      <section className="px-4 py-16">
+      <section className="px-4 py-16 bg-muted/30">
         <div className="mx-auto max-w-7xl">
           <div className="text-center mb-10">
-            <h2 className="text-3xl font-black text-white mb-3">ทำไมต้อง Cloud Space?</h2>
+            <h2 className="text-3xl font-bold text-foreground mb-3">ทำไมต้อง Cloud Space?</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map((f) => (
-              <div key={f.title} className="card-neon p-6 text-center group">
-                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">{f.icon}</div>
-                <h3 className="text-white font-bold mb-2">{f.title}</h3>
-                <p className="text-[#94a3b8] text-sm">{f.desc}</p>
+              <div key={f.title} className="card-clean p-6 text-center group">
+                <div className="text-4xl mb-4 group-hover:-translate-y-2 transition-transform duration-300">{f.icon}</div>
+                <h3 className="text-foreground font-bold mb-2">{f.title}</h3>
+                <p className="text-muted-foreground text-sm">{f.desc}</p>
               </div>
             ))}
           </div>
@@ -166,27 +153,27 @@ export default async function HomePage() {
       </section>
 
       {/* CTA */}
-      <section className="px-4 py-16">
-        <div className="mx-auto max-w-3xl text-center card-neon p-12 border border-[#8b5cf6]/30 bg-gradient-to-br from-[#8b5cf6]/10 to-[#00d4ff]/5">
+      <section className="px-4 py-24">
+        <div className="mx-auto max-w-3xl text-center card-clean p-12">
           {session ? (
             <>
-              <h2 className="text-3xl font-black text-white mb-4">พร้อมใช้งานแล้วหรือยัง?</h2>
-              <p className="text-[#94a3b8] mb-8">เลือกโปรโมชั่นที่ถูกใจและจองเครื่องได้เลย</p>
+              <h2 className="text-3xl font-bold text-foreground mb-4">พร้อมใช้งานแล้วหรือยัง?</h2>
+              <p className="text-muted-foreground mb-8 text-lg">เลือกโปรโมชั่นที่ถูกใจและจองเครื่องได้เลย</p>
               <div className="flex justify-center gap-4">
-                <Link href="#promotions" className="btn-cyber px-8 py-4 rounded-xl text-lg font-bold inline-block">
+                <Link href="#promotions" className="btn-primary px-8 py-4 text-lg inline-block">
                   ดูโปรโมชั่นทั้งหมด
                 </Link>
               </div>
             </>
           ) : (
             <>
-              <h2 className="text-3xl font-black text-white mb-4">พร้อมใช้งานแล้วหรือยัง?</h2>
-              <p className="text-[#94a3b8] mb-8">สมัครสมาชิกฟรี รับสิทธิ์ส่วนลดบิลแรกทันที</p>
+              <h2 className="text-3xl font-bold text-foreground mb-4">พร้อมใช้งานแล้วหรือยัง?</h2>
+              <p className="text-muted-foreground mb-8 text-lg">สมัครสมาชิกฟรี รับสิทธิ์ส่วนลดบิลแรกทันที</p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <Link href="/register" className="btn-cyber px-8 py-4 rounded-xl text-lg font-bold inline-block">
+                <Link href="/register" className="btn-primary px-8 py-4 text-lg inline-block">
                   สมัครสมาชิกฟรี
                 </Link>
-                <Link href="#promotions" className="px-8 py-4 rounded-xl text-lg font-bold border border-[#94a3b8]/30 text-[#94a3b8] hover:text-white hover:border-white/30 transition-all inline-block">
+                <Link href="#promotions" className="px-8 py-4 rounded-xl text-lg font-bold border border-border text-foreground hover:bg-muted transition-all inline-block">
                   ดูโปรโมชั่น
                 </Link>
               </div>
@@ -196,7 +183,7 @@ export default async function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-[#1e2035] px-4 py-8 text-center text-[#475569] text-sm">
+      <footer className="border-t border-border px-4 py-8 text-center text-muted-foreground text-sm bg-background">
         <p className="mb-1">© 2024 Cloud Space — Online Computer Rental System</p>
         <p>เปิดให้บริการตลอด 24 ชั่วโมง | ฝ่ายสนับสนุน: 02-XXX-XXXX</p>
       </footer>

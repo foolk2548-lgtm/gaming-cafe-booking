@@ -55,45 +55,45 @@ export default function LoginPage() {
         {/* Logo */}
         <div className="text-center mb-8">
           <Link href="/" className="inline-block">
-            <h1 className="text-3xl font-black tracking-wider" style={{ fontFamily: 'Orbitron' }}>
-              CLOUD<span className="text-[#00d4ff]">SPACE</span>
+            <h1 className="text-3xl font-extrabold tracking-wider">
+              CLOUD<span className="text-primary-600 dark:text-primary-400">SPACE</span>
             </h1>
           </Link>
-          <p className="text-[#94a3b8] mt-2">เข้าสู่ระบบเพื่อเช่า Cloud PC</p>
+          <p className="text-muted-foreground mt-2">เข้าสู่ระบบเพื่อเช่า Cloud PC</p>
         </div>
 
         {/* Card */}
-        <div className="card-neon p-8 border border-[#1e2035]">
-          <h2 className="text-xl font-bold text-white mb-6">เข้าสู่ระบบ</h2>
+        <div className="card-clean p-8 border border-border">
+          <h2 className="text-xl font-bold text-foreground mb-6">เข้าสู่ระบบ</h2>
 
           {error && (
-            <div className="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-sm">
+            <div className="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400 text-sm">
               ⚠️ {error}
             </div>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm text-[#94a3b8] mb-1.5">อีเมล</label>
+              <label className="block text-sm text-muted-foreground mb-1.5">อีเมล</label>
               <input
                 id="email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="input-cyber w-full px-4 py-3 rounded-lg border text-sm"
+                className="input-clean w-full px-4 py-3 rounded-lg border text-sm"
                 placeholder="example@email.com"
               />
             </div>
             <div>
-              <label className="block text-sm text-[#94a3b8] mb-1.5">รหัสผ่าน</label>
+              <label className="block text-sm text-muted-foreground mb-1.5">รหัสผ่าน</label>
               <input
                 id="password"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="input-cyber w-full px-4 py-3 rounded-lg border text-sm"
+                className="input-clean w-full px-4 py-3 rounded-lg border text-sm"
                 placeholder="••••••••"
               />
             </div>
@@ -101,15 +101,15 @@ export default function LoginPage() {
               id="login-submit"
               type="submit"
               disabled={loading}
-              className="btn-cyber w-full py-3 rounded-lg font-bold text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+              className="btn-primary w-full py-3 rounded-lg text-sm disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? '⏳ กำลังเข้าสู่ระบบ...' : '🚀 เข้าสู่ระบบ'}
             </button>
           </form>
 
-          <p className="text-center text-sm text-[#94a3b8] mt-6">
+          <p className="text-center text-sm text-muted-foreground mt-6">
             ยังไม่มีบัญชี?{' '}
-            <Link href="/register" className="text-[#00d4ff] hover:underline">สมัครสมาชิก</Link>
+            <Link href="/register" className="text-primary-600 dark:text-primary-400 hover:underline">สมัครสมาชิก</Link>
           </p>
         </div>
 
